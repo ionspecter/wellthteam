@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Member Login — WELLTH Team</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#04150E; --forest:#0A3623; --emerald:#1C7A46; --leaf:#57C083;
+    --gold:#E0A526; --gold-lt:#F6DA9B; --haze:#EAF4ED; --muted:rgba(234,244,237,.66);
+    --glass:rgba(255,255,255,.055); --edge:rgba(255,255,255,.14);
+    --display:"Archivo",system-ui,sans-serif; --body:"Plus Jakarta Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; display:grid; place-items:center;
+    background:var(--ink); color:var(--haze); font-family:var(--body);
+    padding:24px;
+  }
+  .card{
+    width:min(100%,380px); background:var(--glass); border:1px solid var(--edge);
+    border-radius:20px; padding:36px 30px; backdrop-filter:blur(20px) saturate(150%);
+  }
+  h1{font-family:var(--display); font-size:22px; margin:0 0 6px; font-weight:800;}
+  p.sub{color:var(--muted); font-size:14px; margin:0 0 26px;}
+  label{display:block; font-size:12.5px; font-weight:700; margin:0 0 6px; color:var(--muted); letter-spacing:.03em}
+  input{
+    width:100%; padding:12px 14px; margin-bottom:16px; border-radius:10px;
+    border:1px solid var(--edge); background:rgba(255,255,255,.06); color:var(--haze);
+    font-family:var(--body); font-size:14.5px;
+  }
+  input:focus{outline:2px solid var(--gold); outline-offset:1px}
+  button{
+    width:100%; padding:13px; border-radius:999px; border:none; cursor:pointer;
+    background:linear-gradient(150deg,var(--gold-lt),var(--gold) 55%,#B8860F); color:#2A1A00;
+    font-family:var(--display); font-weight:800; font-size:13px; letter-spacing:.08em;
+    text-transform:uppercase; margin-top:6px;
+  }
+  button:disabled{opacity:.6; cursor:default}
+  .err{color:#ff9b9b; font-size:13.5px; margin:-8px 0 14px; min-height:1em}
+  .back{display:block; text-align:center; margin-top:20px; font-size:13px; color:var(--muted); text-decoration:none}
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Member Login</h1>
+    <p class="sub">Tools, templates, and resources for the WELLTH Team.</p>
+    <form id="loginForm">
+      <label for="email">Email</label>
+      <input type="email" id="email" required autocomplete="username">
+      <label for="password">Password</label>
+      <input type="password" id="password" required autocomplete="current-password">
+      <div class="err" id="err"></div>
+      <button type="submit" id="submitBtn">Log in</button>
+    </form>
+    <a class="back" href="/">&larr; Back to wellthteam.com</a>
+  </div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  var errEl = document.getElementById('err');
+  errEl.textContent = '';
+  btn.disabled = true; btn.textContent = 'Logging in…';
+
+  try {
+    var res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+      })
+    });
+    var data = await res.json();
+    if(!res.ok){ throw new Error(data.error || 'Login failed'); }
+    window.location.href = '/members/dashboard.html';
+  } catch(err){
+    errEl.textContent = err.message;
+    btn.disabled = false; btn.textContent = 'Log in';
+  }
+});
+</script>
+</body>
+</html>

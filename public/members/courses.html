@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masterclasses — WELLTH Team</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#04150E; --forest:#0A3623; --emerald:#1C7A46; --leaf:#57C083;
+    --gold:#E0A526; --gold-lt:#F6DA9B; --haze:#EAF4ED; --muted:rgba(234,244,237,.66);
+    --glass:rgba(255,255,255,.055); --edge:rgba(255,255,255,.14);
+    --display:"Archivo",system-ui,sans-serif; --body:"Plus Jakarta Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--ink); color:var(--haze); font-family:var(--body); min-height:100vh}
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px clamp(18px,4vw,44px); border-bottom:1px solid var(--edge);
+  }
+  header h1{font-family:var(--display); font-size:17px; margin:0; font-weight:800}
+  header a.back{color:var(--muted); font-size:13px; text-decoration:none}
+  main{padding:clamp(18px,4vw,44px); max-width:1100px; margin:0 auto}
+  h2{font-family:var(--display); font-size:clamp(22px,3vw,28px); margin:0 0 6px}
+  p.sub{color:var(--muted); margin:0 0 30px; font-size:14.5px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:18px}
+  .course{
+    background:var(--glass); border:1px solid var(--edge); border-radius:16px;
+    overflow:hidden; text-decoration:none; color:var(--haze); display:block;
+    transition:transform .2s, border-color .2s;
+  }
+  .course:hover{transform:translateY(-3px); border-color:var(--gold)}
+  .thumb{
+    aspect-ratio:16/9; background:linear-gradient(135deg,var(--forest),var(--emerald));
+    display:grid; place-items:center; font-size:34px;
+  }
+  .body{padding:18px}
+  .body h3{font-family:var(--display); font-size:15px; margin:0 0 6px; font-weight:800}
+  .body p{color:var(--muted); font-size:13px; margin:0 0 10px; line-height:1.5}
+  .count{font-size:11.5px; color:var(--gold); font-weight:700; letter-spacing:.04em; text-transform:uppercase}
+  #empty, #loading{padding:60px 0; text-align:center; color:var(--muted)}
+</style>
+</head>
+<body>
+  <header>
+    <h1>WELLTH Team <span style="color:var(--muted);font-weight:500">/ Masterclasses</span></h1>
+    <a class="back" href="/members/dashboard.html">&larr; Dashboard</a>
+  </header>
+  <main>
+    <h2>Pick a masterclass</h2>
+    <p class="sub">Click a topic to see all the videos in it.</p>
+    <div id="loading">Loading…</div>
+    <div id="empty" style="display:none">No masterclasses yet — check back soon.</div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+<script>
+(async function(){
+  try {
+    var res = await fetch('/api/courses');
+    if(res.status === 401){ window.location.href = '/members/login.html'; return; }
+    var data = await res.json();
+    document.getElementById('loading').style.display = 'none';
+
+    if(!data.courses || data.courses.length === 0){
+      document.getElementById('empty').style.display = 'block';
+      return;
+    }
+
+    var grid = document.getElementById('grid');
+    data.courses.forEach(function(c){
+      var a = document.createElement('a');
+      a.className = 'course';
+      a.href = '/members/course.html?id=' + c.id;
+      a.innerHTML =
+        '<div class="thumb">🎬</div>' +
+        '<div class="body">' +
+          '<h3>' + c.title + '</h3>' +
+          '<p>' + (c.description || '') + '</p>' +
+          '<div class="count">' + c.lesson_count + (c.lesson_count === 1 ? ' video' : ' videos') + '</div>' +
+        '</div>';
+      grid.appendChild(a);
+    });
+  } catch(e){
+    document.getElementById('loading').textContent = 'Something went wrong loading masterclasses.';
+  }
+})();
+</script>
+</body>
+</html>

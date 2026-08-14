@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Member Dashboard — WELLTH Team</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#04150E; --forest:#0A3623; --emerald:#1C7A46; --leaf:#57C083;
+    --gold:#E0A526; --gold-lt:#F6DA9B; --haze:#EAF4ED; --muted:rgba(234,244,237,.66);
+    --glass:rgba(255,255,255,.055); --edge:rgba(255,255,255,.14);
+    --display:"Archivo",system-ui,sans-serif; --body:"Plus Jakarta Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ink); color:var(--haze); font-family:var(--body);
+    min-height:100vh;
+  }
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px clamp(18px,4vw,44px); border-bottom:1px solid var(--edge);
+  }
+  header h1{font-family:var(--display); font-size:17px; margin:0; font-weight:800}
+  header span{color:var(--muted); font-size:13px}
+  #logoutBtn{
+    background:transparent; border:1px solid var(--edge); color:var(--haze);
+    padding:9px 18px; border-radius:999px; font-family:var(--display);
+    font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; cursor:pointer;
+  }
+  #logoutBtn:hover{background:rgba(255,255,255,.08)}
+  main{padding:clamp(18px,4vw,44px); max-width:1100px; margin:0 auto}
+  .greet{margin:6px 0 34px}
+  .greet h2{font-family:var(--display); font-size:clamp(22px,3vw,30px); margin:0 0 6px}
+  .greet p{color:var(--muted); margin:0; font-size:14.5px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px}
+  .tool{
+    background:var(--glass); border:1px solid var(--edge); border-radius:16px;
+    padding:22px; text-decoration:none; color:var(--haze); display:block;
+    transition:transform .2s, border-color .2s;
+  }
+  .tool:hover{transform:translateY(-3px); border-color:var(--gold)}
+  .tool .ic{font-size:26px; margin-bottom:12px}
+  .tool h3{font-family:var(--display); font-size:15.5px; margin:0 0 6px; font-weight:800}
+  .tool p{color:var(--muted); font-size:13px; margin:0; line-height:1.5}
+  #loading{padding:60px; text-align:center; color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="loading">Loading…</div>
+
+<div id="app" style="display:none">
+  <header>
+    <h1>WELLTH Team <span>/ Member Tools</span></h1>
+    <button id="logoutBtn">Log out</button>
+  </header>
+  <main>
+    <div class="greet">
+      <h2 id="hello">Welcome back</h2>
+      <p id="tierline"></p>
+    </div>
+    <div class="grid" id="toolGrid"></div>
+
+    <div class="greet" style="margin-top:44px">
+      <h2 style="font-size:clamp(20px,2.6vw,26px)">Masterclasses</h2>
+      <p>Facebook Ads, product training, and more — organized by topic.</p>
+    </div>
+    <div class="grid">
+      <a class="tool" href="/members/courses.html">
+        <div class="ic">🎓</div>
+        <h3>Browse Masterclasses</h3>
+        <p>Pick a topic, watch every video in it.</p>
+      </a>
+    </div>
+  </main>
+</div>
+
+<script>
+// Add/remove tools here as you build more. href points at static files
+// under /members/tools/ — protected automatically by the same login gate.
+var TOOLS = [
+  { icon:'🖼️', name:'Background Remover', desc:'Strip backgrounds from product photos.', href:'/members/tools/bg-remover.html' },
+  { icon:'🗂️', name:'Catalog Maker', desc:'Build branded product catalogs with your reseller footer.', href:'/members/tools/catalog-maker.html' },
+  { icon:'📣', name:'Poster Maker', desc:'Quick social posters for promos and announcements.', href:'/members/tools/poster-maker.html' }
+];
+
+(async function(){
+  try {
+    var res = await fetch('/api/me');
+    if(!res.ok){ window.location.href = '/members/login.html'; return; }
+    var me = await res.json();
+
+    document.getElementById('hello').textContent = 'Welcome back, ' + me.name;
+    document.getElementById('tierline').textContent =
+      (me.tier ? me.tier.charAt(0).toUpperCase() + me.tier.slice(1) + ' member' : 'Member') +
+      (me.reseller_tag ? ' · ' + me.reseller_tag : '');
+
+    var grid = document.getElementById('toolGrid');
+    TOOLS.forEach(function(t){
+      var a = document.createElement('a');
+      a.className = 'tool';
+      a.href = t.href + (me.reseller_tag ? '?reseller=' + encodeURIComponent(me.reseller_tag) : '');
+      a.innerHTML = '<div class="ic">' + t.icon + '</div><h3>' + t.name + '</h3><p>' + t.desc + '</p>';
+      grid.appendChild(a);
+    });
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  } catch(e) {
+    window.location.href = '/members/login.html';
+  }
+})();
+
+document.getElementById('logoutBtn').addEventListener('click', async function(){
+  await fetch('/api/logout', { method: 'POST' });
+  window.location.href = '/members/login.html';
+});
+</script>
+</body>
+</html>

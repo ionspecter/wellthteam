@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WELLTH TEAM — Together in health and wealth</title>
+<meta name="description" content="WELLTH Team builds health and wealth at the same time. Free masterclass, done-for-you tools, and real mentorship for Filipino builders.">
+<meta name="theme-color" content="#04150E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wellthteam.com/">
+<meta property="og:title" content="WELLTH TEAM — Together in health and wealth">
+<meta property="og:description" content="Health and wealth share the same ending. We build both at the same time.">
+<meta property="og:image" content="https://wellthteam.com/assets/WELLTH_PROFILE_PICTURE.webp">
+
+<link rel="icon" href="assets/WELLTH_PROFILE_PICTURE.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,300..500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   WELLTH TEAM — design tokens
+   Palette : ink #04150E · forest #0A3623 · emerald #1C7A46
+             leaf #57C083 · gold #E0A526 · haze #EAF4ED
+   Type    : Archivo (expanded display) · Plus Jakarta Sans (body)
+             Newsreader italic (quotes only)
+   Signature: "the rising line" — a gold thread that climbs the
+             page as you scroll, echoing the logo's arrow.
+   ============================================================ */
+:root{
+  --ink:#04150E;
+  --forest:#0A3623;
+  --emerald:#1C7A46;
+  --leaf:#57C083;
+  --gold:#E0A526;
+  --gold-lt:#F6DA9B;
+  --haze:#EAF4ED;
+  --muted:rgba(234,244,237,.66);
+
+  --glass:rgba(255,255,255,.055);
+  --glass-2:rgba(255,255,255,.09);
+  --edge:rgba(255,255,255,.14);
+  --edge-hi:rgba(255,255,255,.30);
+  --blur:blur(20px) saturate(150%);
+
+  --r-lg:28px; --r-md:20px; --r-sm:14px;
+  --shell:1240px;
+  --gut:clamp(18px,4vw,44px);
+
+  --display:"Archivo",system-ui,sans-serif;
+  --body:"Plus Jakarta Sans",system-ui,sans-serif;
+  --quote:"Newsreader",Georgia,serif;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--haze);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* ---------- ambient field ---------- */
+.field{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.field span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55}
+.o1{width:60vw;height:60vw;left:-18vw;top:-16vw;background:radial-gradient(circle,#0F6E3E 0%,transparent 70%)}
+.o2{width:46vw;height:46vw;right:-12vw;top:22vh;background:radial-gradient(circle,#B57C10 0%,transparent 70%);opacity:.34}
+.o3{width:54vw;height:54vw;left:12vw;bottom:-22vw;background:radial-gradient(circle,#0C7A5A 0%,transparent 72%);opacity:.26}
+.grain{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.32;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+
+/* ---------- shared bits ---------- */
+.shell{width:min(100% - (var(--gut)*2),var(--shell));margin-inline:auto}
+.glass{
+  background:var(--glass);
+  border:1px solid var(--edge);
+  border-radius:var(--r-lg);
+  backdrop-filter:var(--blur);
+  -webkit-backdrop-filter:var(--blur);
+  box-shadow:0 24px 60px -30px rgba(0,0,0,.85), inset 0 1px 0 var(--edge-hi);
+}
+section{padding:clamp(64px,9vw,118px) 0;position:relative}
+section[id]{scroll-margin-top:112px}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--display);font-size:11px;font-weight:700;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);
+  font-variation-settings:'wdth' 108;
+  margin:0 0 18px;
+}
+.eyebrow::before{
+  content:"";width:26px;height:9px;flex:none;
+  background:linear-gradient(90deg,transparent,var(--gold));
+  clip-path:polygon(0 100%,100% 0,100% 100%);
+}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.03;margin:0;
+  font-variation-settings:'wdth' 112;letter-spacing:-.015em}
+h2{font-size:clamp(30px,4.6vw,54px)}
+h3{font-size:19px;font-weight:700;letter-spacing:-.01em;font-variation-settings:'wdth' 104}
+.lede{font-size:clamp(16px,1.5vw,18.5px);color:var(--muted);max-width:62ch;margin:18px 0 0}
+.gold{color:var(--gold)}
+.sec-head{max-width:760px;margin-bottom:clamp(34px,4vw,56px)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 26px;border-radius:999px;border:1px solid transparent;
+  font-family:var(--display);font-weight:800;font-size:13.5px;
+  letter-spacing:.1em;text-transform:uppercase;font-variation-settings:'wdth' 104;
+  transition:transform .25s cubic-bezier(.2,.8,.3,1),box-shadow .25s,background .25s;
+}
+.btn-gold{background:linear-gradient(150deg,var(--gold-lt),var(--gold) 55%,#B8860F);color:#2A1A00;
+  box-shadow:0 14px 34px -14px rgba(224,165,38,.75)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 20px 44px -14px rgba(224,165,38,.9)}
+.btn-ghost{background:var(--glass-2);border-color:var(--edge);color:var(--haze);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+.btn-ghost:hover{transform:translateY(-3px);background:rgba(255,255,255,.14)}
+
+/* ---------- masterclass preview (locked) ---------- */
+.preview-card{
+  position:relative; border-radius:var(--r-md); overflow:hidden;
+  border:1px solid var(--edge); background:var(--glass);
+  backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+  padding:24px; display:flex; flex-direction:column; gap:10px;
+}
+.preview-card .lock-tag{
+  display:inline-flex; align-items:center; gap:6px; align-self:flex-start;
+  font-family:var(--display); font-size:10.5px; font-weight:800; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink); background:var(--gold);
+  padding:4px 10px; border-radius:999px;
+}
+.preview-card h3{font-size:17px}
+.preview-card p{color:var(--muted); font-size:13.5px; margin:0; line-height:1.55}
+.preview-card .count{font-size:12px; color:var(--leaf); font-weight:700}
+.preview-card .unlock{
+  margin-top:6px; align-self:flex-start; font-family:var(--display); font-size:12px;
+  font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--gold);
+}
+
+/* ---------- rising line (signature) ---------- */
+.rail{position:fixed;left:26px;top:0;bottom:0;width:2px;z-index:5;pointer-events:none}
+.rail i{position:absolute;inset:0;background:rgba(255,255,255,.09)}
+.rail b{position:absolute;left:0;bottom:0;width:100%;height:0;
+  background:linear-gradient(180deg,var(--gold),var(--leaf));box-shadow:0 0 14px rgba(224,165,38,.6)}
+.rail em{position:absolute;left:-4px;width:10px;height:10px;border-radius:50%;background:var(--gold);
+  box-shadow:0 0 0 4px rgba(224,165,38,.18);transform:translateY(50%)}
+@media(max-width:1180px){.rail{display:none}}
+
+/* ---------- top bar ---------- */
+.topbar{border-bottom:1px solid rgba(255,255,255,.07);background:rgba(4,21,14,.55);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);position:relative;z-index:60}
+.topbar .shell{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:42px;font-size:12.5px}
+#ticker{color:var(--muted);display:flex;align-items:center;gap:9px;min-width:0}
+#ticker s{width:6px;height:6px;border-radius:50%;background:var(--leaf);flex:none;text-decoration:none;
+  animation:pulse 2.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+#ticker span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .4s}
+.socials{display:flex;gap:8px;flex:none}
+.socials a{width:28px;height:28px;display:grid;place-items:center;border-radius:9px;
+  border:1px solid rgba(255,255,255,.12);color:var(--muted);transition:.25s}
+.socials a:hover{color:var(--ink);background:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
+.socials svg{width:14px;height:14px;fill:currentColor}
+
+/* ---------- header ---------- */
+.head{position:sticky;top:0;z-index:50;transition:padding .3s}
+.head-in{display:flex;align-items:center;gap:20px;padding:10px 12px 10px 14px;margin-top:14px;
+  border-radius:999px;background:rgba(10,54,35,.42);border:1px solid var(--edge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:0 20px 50px -32px #000, inset 0 1px 0 var(--edge-hi);transition:.35s}
+.head.stuck .head-in{background:rgba(4,21,14,.78);margin-top:8px}
+.brand{display:flex;align-items:center;gap:11px;flex:none}
+.brand img{width:40px;height:40px;border-radius:50%;object-fit:cover;
+  box-shadow:0 0 0 1.5px var(--gold),0 0 22px -6px rgba(224,165,38,.8)}
+.brand b{font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:.03em;
+  font-variation-settings:'wdth' 100;line-height:1}
+.brand small{display:block;font-family:var(--body);font-weight:500;font-size:9.5px;
+  letter-spacing:.22em;color:var(--muted);text-transform:uppercase;margin-top:3px}
+nav{margin-left:auto;display:flex;gap:4px}
+nav a{padding:9px 13px;border-radius:999px;font-size:13.5px;font-weight:500;color:var(--muted);transition:.22s}
+nav a:hover{color:var(--haze);background:rgba(255,255,255,.08)}
+.head .btn{padding:12px 20px;font-size:12px;flex:none}
+.burger{display:none;margin-left:auto;width:42px;height:42px;border-radius:14px;background:var(--glass-2);
+  border:1px solid var(--edge);color:var(--haze);align-items:center;justify-content:center}
+.burger span{display:block;width:17px;height:1.6px;background:currentColor;border-radius:2px;position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:17px;height:1.6px;
+  background:currentColor;border-radius:2px;transition:.28s}
+.burger span::before{top:-5.5px}.burger span::after{top:5.5px}
+.drawer{display:none}
+
+@media(max-width:940px){
+  nav,.head .btn{display:none}
+  .burger{display:inline-flex}
+  .drawer{display:block;position:fixed;inset:0;z-index:70;visibility:hidden;opacity:0;transition:.3s}
+  .drawer.on{visibility:visible;opacity:1}
+  .drawer .sheet{position:absolute;inset:12px;border-radius:var(--r-lg);padding:26px;
+    background:rgba(6,32,21,.92);border:1px solid var(--edge);
+    backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+    display:flex;flex-direction:column;gap:6px;transform:translateY(-14px);transition:.3s}
+  .drawer.on .sheet{transform:none}
+  .drawer a{padding:14px 4px;font-family:var(--display);font-weight:700;font-size:21px;
+    border-bottom:1px solid rgba(255,255,255,.08);font-variation-settings:'wdth' 108}
+  .drawer .btn{margin-top:20px}
+  .drawer .x{position:absolute;top:20px;right:20px;background:none;border:0;color:var(--haze);font-size:26px;line-height:1}
+}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(40px,6vw,74px);padding-bottom:clamp(56px,7vw,96px)}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(28px,4vw,58px);align-items:center}
+.plate{padding:clamp(26px,3.4vw,44px);border-radius:var(--r-lg);position:relative;overflow:hidden;
+  background:linear-gradient(155deg,rgba(255,255,255,.97),rgba(255,255,255,.88));
+  border:1px solid rgba(255,255,255,.6);
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.9), inset 0 1px 0 #fff;
+  backdrop-filter:blur(26px);-webkit-backdrop-filter:blur(26px)}
+.plate::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.75) 47%,transparent 56%);
+  transform:translateX(-120%);animation:sheen 7s 1.2s infinite}
+@keyframes sheen{0%{transform:translateX(-120%)}28%,100%{transform:translateX(120%)}}
+.plate img{margin-inline:auto;width:100%;max-width:430px}
+.plate .stamp{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-family:var(--display);
+  font-size:10px;font-weight:700;letter-spacing:.34em;color:rgba(10,54,35,.42);text-transform:uppercase}
+
+h1{font-size:clamp(46px,8.4vw,96px);font-variation-settings:'wdth' 118;letter-spacing:-.03em}
+h1 .th{background:linear-gradient(160deg,var(--gold-lt),var(--gold) 50%,#A97A08);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+h1 small{display:block;font-size:clamp(15px,2.1vw,24px);font-weight:600;letter-spacing:.34em;
+  color:var(--leaf);margin-top:14px;font-variation-settings:'wdth' 100}
+.thesis{font-size:clamp(18px,2.1vw,23px);line-height:1.45;margin:26px 0 0;font-weight:500}
+.split{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0;padding:0;list-style:none}
+.split li{padding:11px 16px;border-radius:14px;background:var(--glass);border:1px solid var(--edge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);font-size:13.5px}
+.split b{font-family:var(--display);font-weight:800;letter-spacing:.06em;margin-right:8px;
+  font-variation-settings:'wdth' 110}
+.split li:nth-child(1) b{color:var(--leaf)} .split li:nth-child(2) b{color:var(--gold)}
+.split li:nth-child(3) b{color:#8FD8FF}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-note{margin:18px 0 0;font-size:12.5px;color:var(--muted)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.plate{order:-1}}
+
+/* ---------- why ---------- */
+.cards{display:grid;gap:16px;grid-template-columns:repeat(3,1fr)}
+.card{padding:28px;border-radius:var(--r-md);background:var(--glass);border:1px solid var(--edge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);position:relative;overflow:hidden;
+  box-shadow:inset 0 1px 0 var(--edge-hi);transition:transform .35s cubic-bezier(.2,.8,.3,1),background .35s}
+.card:hover{transform:translateY(-6px);background:var(--glass-2)}
+.card p{color:var(--muted);font-size:14.5px;margin:10px 0 0}
+.card .ic{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;margin-bottom:18px;
+  background:linear-gradient(150deg,rgba(87,192,131,.28),rgba(224,165,38,.22));border:1px solid var(--edge)}
+.card .ic svg{width:20px;height:20px;stroke:var(--gold);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.cards{grid-template-columns:1fr}}
+
+/* ---------- video ---------- */
+.video-wrap{padding:clamp(12px,1.4vw,18px);border-radius:var(--r-lg)}
+.frame{position:relative;aspect-ratio:16/9;border-radius:var(--r-md);overflow:hidden;
+  background:radial-gradient(120% 120% at 30% 15%,#12673D 0,transparent 60%),
+             linear-gradient(150deg,#0C4429,#04150E 65%);
+  display:grid;place-items:center;border:1px solid var(--edge)}
+.frame::before{content:"";position:absolute;inset:0;
+  background:radial-gradient(60% 60% at 50% 50%,rgba(224,165,38,.16),transparent 70%)}
+.frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.play{position:relative;width:86px;height:86px;border-radius:50%;border:1px solid var(--edge-hi);
+  background:rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:grid;place-items:center;transition:.3s}
+.play::after{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(224,165,38,.35);
+  animation:ring 2.8s infinite}
+@keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+.play svg{width:26px;height:26px;fill:var(--gold);margin-left:4px}
+.play:hover{background:var(--gold)}.play:hover svg{fill:#2A1A00}
+.frame figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 24px;text-align:left;
+  background:linear-gradient(0deg,rgba(4,21,14,.85),transparent);font-size:13.5px;color:var(--muted)}
+.frame figcaption b{display:block;color:var(--haze);font-family:var(--display);font-weight:700;font-size:16px}
+
+/* ---------- team ---------- */
+.team-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.op{padding:22px 16px;border-radius:var(--r-md);text-align:center;background:var(--glass);
+  border:1px solid var(--edge);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  box-shadow:inset 0 1px 0 var(--edge-hi);transition:transform .35s cubic-bezier(.2,.8,.3,1),background .35s}
+.op:hover{transform:translateY(-6px);background:var(--glass-2)}
+.op .av{width:74px;height:74px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--display);font-weight:800;font-size:23px;letter-spacing:.02em;color:var(--haze);
+  background:linear-gradient(150deg,rgba(28,122,70,.85),rgba(4,21,14,.6));
+  border:1px solid var(--edge-hi);position:relative}
+.op .av::after{content:"";position:absolute;inset:-5px;border-radius:50%;
+  border:1px solid rgba(224,165,38,.4);border-top-color:transparent;border-left-color:transparent}
+.op h3{font-size:15px}
+.op .role{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:7px 0 0;
+  font-family:var(--display);font-weight:700}
+.op .base{font-size:12px;color:var(--muted);margin:6px 0 0}
+@media(max-width:1050px){.team-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.team-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- testimonials ---------- */
+.says{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.say{padding:26px;border-radius:var(--r-md);background:var(--glass);border:1px solid var(--edge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);box-shadow:inset 0 1px 0 var(--edge-hi)}
+.say p{margin:0;font-size:15px;line-height:1.7}
+.say .who{display:flex;align-items:center;gap:11px;margin-top:20px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.09)}
+.say .who i{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-style:normal;
+  font-family:var(--display);font-weight:800;font-size:13px;background:rgba(224,165,38,.16);
+  border:1px solid rgba(224,165,38,.35);color:var(--gold-lt);flex:none}
+.say .who b{display:block;font-size:14px}
+.say .who span{font-size:11.5px;color:var(--muted)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px;margin-bottom:14px}
+@media(max-width:900px){.says{grid-template-columns:1fr}}
+
+/* ---------- offer ---------- */
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.offer{padding:26px;border-radius:var(--r-md);background:var(--glass);border:1px solid var(--edge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);position:relative;
+  box-shadow:inset 0 1px 0 var(--edge-hi);transition:transform .35s,border-color .35s}
+.offer:hover{transform:translateY(-6px);border-color:rgba(224,165,38,.45)}
+.offer .tag{position:absolute;top:18px;right:18px;font-family:var(--display);font-size:10px;font-weight:800;
+  letter-spacing:.18em;padding:5px 10px;border-radius:999px;background:rgba(87,192,131,.16);
+  border:1px solid rgba(87,192,131,.4);color:var(--leaf)}
+.offer h3{padding-right:60px}
+.offer p{color:var(--muted);font-size:14.5px;margin:10px 0 0}
+@media(max-width:900px){.offer-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.offer-grid{grid-template-columns:1fr}}
+
+/* ---------- join ---------- */
+.join-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(22px,3vw,44px);align-items:start}
+.steps{list-style:none;padding:0;margin:26px 0 0;counter-reset:s}
+.steps li{position:relative;padding:0 0 22px 52px;counter-increment:s}
+.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:-2px;
+  width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-family:var(--display);
+  font-weight:800;font-size:12px;color:var(--gold);background:rgba(224,165,38,.12);
+  border:1px solid rgba(224,165,38,.34)}
+.steps li:not(:last-child)::after{content:"";position:absolute;left:17px;top:38px;bottom:6px;width:1px;
+  background:linear-gradient(180deg,rgba(224,165,38,.4),transparent)}
+.steps b{display:block;font-family:var(--display);font-weight:700;font-size:16px}
+.steps span{font-size:14px;color:var(--muted)}
+form{padding:clamp(24px,3vw,38px);border-radius:var(--r-lg)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  font-family:var(--display);font-weight:700;margin:0 0 8px}
+.fld{margin-bottom:16px}
+input,textarea{width:100%;padding:13px 15px;border-radius:13px;background:rgba(255,255,255,.06);
+  border:1px solid var(--edge);color:var(--haze);font-family:var(--body);font-size:15px;transition:.25s}
+input::placeholder,textarea::placeholder{color:rgba(234,244,237,.34)}
+input:focus,textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.1);
+  box-shadow:0 0 0 4px rgba(224,165,38,.14)}
+textarea{resize:vertical;min-height:88px}
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:12.5px;color:var(--muted);margin:4px 0 20px;
+  text-transform:none;letter-spacing:normal;font-family:var(--body);font-weight:400;line-height:1.55}
+.consent input{width:17px;height:17px;flex:none;margin-top:2px;accent-color:var(--gold)}
+form button.btn{width:100%}
+form .hero-cta .btn{flex:1 1 190px}
+.or{display:flex;align-items:center;gap:14px;margin:20px 0 0;font-size:12px;color:var(--muted)}
+.or::before,.or::after{content:"";height:1px;flex:1;background:rgba(255,255,255,.1)}
+@media(max-width:900px){.join-grid{grid-template-columns:1fr}.f2{grid-template-columns:1fr}}
+
+/* ---------- quotes ---------- */
+.quotes{overflow:hidden}
+.stage{position:relative;padding:clamp(34px,5vw,64px) clamp(24px,5vw,72px);border-radius:var(--r-lg);
+  min-height:330px;display:grid;align-items:center}
+.stage::before{content:"”";position:absolute;top:-26px;left:24px;font-family:var(--quote);font-size:180px;
+  color:rgba(224,165,38,.16);line-height:1;pointer-events:none}
+.slide{grid-area:1/1;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;
+  pointer-events:none;text-align:center}
+.slide.on{opacity:1;transform:none;pointer-events:auto}
+.slide q{font-family:var(--quote);font-style:italic;font-weight:300;quotes:none;
+  font-size:clamp(23px,3.6vw,42px);line-height:1.28;display:block;max-width:20ch;margin-inline:auto}
+.slide q::before,.slide q::after{content:""}
+.slide .by{margin-top:26px;font-family:var(--display);font-weight:800;font-size:13px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold)}
+.slide .era{font-size:12px;color:var(--muted);letter-spacing:.06em;margin-top:6px}
+.qnav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:26px}
+.qnav button{width:44px;height:44px;border-radius:50%;background:var(--glass-2);border:1px solid var(--edge);
+  color:var(--haze);display:grid;place-items:center;transition:.25s;backdrop-filter:var(--blur)}
+.qnav button:hover{background:var(--gold);color:#2A1A00;border-color:var(--gold)}
+.qnav svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dots{display:flex;gap:7px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.25s}
+.dots i.on{background:var(--gold);width:22px;border-radius:999px}
+
+/* ---------- CTA band ---------- */
+.band{padding:clamp(38px,5vw,68px);border-radius:var(--r-lg);text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(150deg,rgba(28,122,70,.42),rgba(4,21,14,.5));border:1px solid var(--edge);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+.band::before{content:"";position:absolute;left:50%;top:-40%;width:120%;height:120%;transform:translateX(-50%);
+  background:radial-gradient(50% 50% at 50% 50%,rgba(224,165,38,.22),transparent 70%)}
+.band>*{position:relative}
+.band h2{max-width:16ch;margin-inline:auto}
+.band .btn{margin-top:28px}
+.band .micro{margin:16px 0 0;font-size:12.5px;color:var(--muted)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid rgba(255,255,255,.08);padding:clamp(48px,6vw,74px) 0 30px;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.4))}
+.f-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:32px}
+.f-grid h4{font-family:var(--display);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin:0 0 16px;font-weight:800}
+.f-grid ul{list-style:none;padding:0;margin:0;display:grid;gap:10px;font-size:14px;color:var(--muted)}
+.f-grid a:hover{color:var(--gold)}
+.f-brand img{width:52px;height:52px;border-radius:50%;box-shadow:0 0 0 1.5px var(--gold)}
+.f-brand p{font-size:14px;color:var(--muted);margin:16px 0 0;max-width:34ch}
+.legal{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11.5px;color:rgba(234,244,237,.45)}
+.disclaimer{margin-top:26px;font-size:11.5px;line-height:1.7;color:rgba(234,244,237,.42);max-width:78ch}
+@media(max-width:820px){.f-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.f-grid{grid-template-columns:1fr}}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.8,.3,1),transform .7s cubic-bezier(.2,.8,.3,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="field" aria-hidden="true"><span class="o1"></span><span class="o2"></span><span class="o3"></span></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- signature: the rising line -->
+<div class="rail" aria-hidden="true"><i></i><b id="railFill"></b><em id="railNode"></em></div>
+
+<!-- ================= TOP BAR ================= -->
+<div class="topbar">
+  <div class="shell">
+    <div id="ticker"><s></s><span>Health first. Wealth follows. Both are built daily.</span></div>
+    <div class="socials">
+      <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1z"/></svg></a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/></svg></a>
+      <a href="https://youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="head" id="head">
+  <div class="shell">
+    <div class="head-in">
+      <a class="brand" href="#top">
+        <img src="assets/WELLTH_PROFILE_PICTURE.webp" alt="WELLTH badge">
+        <span><b>WELLTH<span class="gold">TEAM</span></b><small>Together in health and wealth</small></span>
+      </a>
+      <nav>
+        <a href="#why">Why WELLTH</a>
+        <a href="#watch">Watch</a>
+        <a href="#team">The team</a>
+        <a href="#stories">Members</a>
+        <a href="#offer">Free training</a>
+      </nav>
+      <a class="btn btn-gold" href="#join">Join the team</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer">
+  <div class="sheet">
+    <button class="x" id="closeDrawer" aria-label="Close menu">&times;</button>
+    <a href="#why">Why WELLTH</a>
+    <a href="#anthems">Team Anthems</a>
+    <a href="#watch">Watch</a>
+    <a href="#team">The team</a>
+    <a href="#stories">Members</a>
+    <a href="#offer">Free training</a>
+    <a href="#quotes">Daily fuel</a>
+    <a class="btn btn-gold" href="#join">Join the team</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="shell hero-grid">
+    <div class="rv">
+      <p class="eyebrow">Ionsky · AIconnect builders</p>
+      <h1>WELL<span class="th">TH</span><small>TEAM</small></h1>
+      <p class="thesis">Health and wealth share the same ending. <span class="gold">WELLTH</span> is where we build both at the same time — one habit, one client, one day at a time.</p>
+      <ul class="split">
+        <li><b>WELL</b> feel good enough to work</li>
+        <li><b>TH</b> the ending of heal<i>th</i> and weal<i>th</i></li>
+        <li><b>WE</b> nobody climbs alone</li>
+      </ul>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="#join">Join the team</a>
+        <a class="btn btn-ghost" href="#watch">Watch the 5-minute overview</a>
+      </div>
+      <p class="hero-note">Free to start learning. No experience needed. Filipino-built, Filipino-run.</p>
+    </div>
+    <div class="plate rv">
+      <img src="assets/WELLTH_Transparent.png" alt="WELLTH — Together in health and wealth">
+      <span class="stamp">Est. Cainta · Philippines</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAM ANTHEMS ================= -->
+<section id="anthems">
+  <div class="shell">
+    <div class="sec-head rv" style="text-align:center;margin-inline:auto">
+      <p class="eyebrow" style="justify-content:center">Team Anthems</p>
+      <h2>Music made for the climb.</h2>
+      <p class="lede" style="margin-inline:auto">Original tracks built for the team. Press play — kantahin mo kasabay namin.</p>
+    </div>
+
+    <div class="an-grid glass rv">
+
+      <!-- player -->
+      <div class="an-panel an-player">
+        <div class="an-art">
+          <div class="an-art-glow" aria-hidden="true"></div>
+          <img class="an-cover" id="anCover" alt="" />
+        </div>
+
+        <div class="an-seek">
+          <input class="an-range an-range--seek" id="anSeek" type="range" min="0" max="1000" value="0" step="1" aria-label="Song position" />
+          <div class="an-times">
+            <span id="anElapsed">0:00</span>
+            <span id="anDuration">0:00</span>
+          </div>
+        </div>
+
+        <div class="an-controls">
+          <button class="an-btn" id="anPrev" type="button" aria-label="Previous song">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 6v12M19 6l-9 6 9 6z"/></svg>
+          </button>
+          <button class="an-btn an-btn--play" id="anPlay" type="button" aria-label="Play">
+            <svg class="an-ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5l11 7-11 7z"/></svg>
+            <svg class="an-ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>
+          </button>
+          <button class="an-btn" id="anNext" type="button" aria-label="Next song">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 6v12M5 6l9 6-9 6z"/></svg>
+          </button>
+          <button class="an-btn an-btn--repeat" id="anRepeat" type="button" aria-label="Repeat this song: off" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <polyline points="17 1 21 5 17 9"></polyline>
+              <path d="M3 11V9a4 4 0 014-4h14"></path>
+              <polyline points="7 23 3 19 7 15"></polyline>
+              <path d="M21 13v2a4 4 0 01-4 4H3"></path>
+              <text x="12" y="15" text-anchor="middle">1</text>
+            </svg>
+          </button>
+        </div>
+
+        <div class="an-vol">
+          <svg class="an-vol-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zM17 9.5a3.5 3.5 0 010 5"/></svg>
+          <input class="an-range an-range--vol" id="anVol" type="range" min="0" max="100" value="85" aria-label="Volume" />
+        </div>
+
+        <ol class="an-list" id="anList"></ol>
+      </div>
+
+      <!-- title + lyrics -->
+      <div class="an-panel an-lyricside">
+        <div class="an-now">
+          <h3 class="an-now-title" id="anTitle">—</h3>
+          <p class="an-now-artist" id="anArtist"></p>
+        </div>
+        <div class="an-lyrics" id="anLyrics" aria-label="Lyrics">
+          <button type="button" class="an-lyric-slot is-adj" id="anSlotPrev"></button>
+          <button type="button" class="an-lyric-slot is-active" id="anSlotActive"></button>
+          <button type="button" class="an-lyric-slot is-adj" id="anSlotNext"></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <audio id="anAudio" preload="metadata"></audio>
+</section>
+
+<style>
+/* ── Team Anthems — uses the site's own tokens, no separate palette ── */
+.an-grid{
+  padding:clamp(20px,3vw,32px);
+  display:grid;grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);
+  gap:clamp(16px,2.5vw,28px);align-items:stretch;
+}
+.an-panel{min-width:0}
+.an-player{border-right:1px solid var(--edge);padding-right:clamp(16px,2.5vw,28px)}
+@media(max-width:860px){ .an-player{border-right:none;border-bottom:1px solid var(--edge);padding-right:0;padding-bottom:24px} }
+
+.an-art{position:relative;aspect-ratio:1;max-width:320px;margin:0 auto 20px auto}
+.an-cover{
+  position:relative;z-index:1;width:100%;height:100%;object-fit:cover;
+  border-radius:var(--r-md);display:block;background:var(--forest);
+  box-shadow:0 22px 50px -22px rgba(0,0,0,.85);
+}
+.an-art-glow{
+  position:absolute;inset:8%;border-radius:50%;z-index:0;
+  background:conic-gradient(from 0deg,var(--gold),var(--leaf),var(--gold));
+  filter:blur(26px);opacity:0;transition:opacity .6s ease;
+}
+#anthems.is-playing .an-art-glow{opacity:.5;animation:an-spin 9s linear infinite}
+@keyframes an-spin{to{transform:rotate(360deg)}}
+
+.an-range{
+  -webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:99px;
+  background:linear-gradient(90deg,var(--gold) var(--fill,0%),rgba(255,255,255,.14) var(--fill,0%));
+  cursor:pointer;outline:none;margin:0;
+}
+.an-range::-webkit-slider-thumb{
+  -webkit-appearance:none;width:13px;height:13px;border-radius:50%;
+  background:var(--haze);border:none;box-shadow:0 0 0 4px rgba(224,165,38,.22);
+}
+.an-range::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--haze);border:none}
+.an-range:focus-visible{box-shadow:0 0 0 3px rgba(87,192,131,.45)}
+.an-times{display:flex;justify-content:space-between;margin-top:9px;font-size:11.5px;letter-spacing:.06em;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.an-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin:18px 0 20px}
+.an-btn{
+  width:42px;height:42px;padding:11px;border-radius:50%;border:none;
+  background:transparent;color:var(--haze);cursor:pointer;
+  transition:color .2s ease,transform .2s ease;
+}
+.an-btn svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.an-ico-play path,#anPrev path,#anNext path{fill:currentColor;stroke-width:1.2}
+.an-btn:hover{color:var(--gold);transform:scale(1.08)}
+.an-btn--play{
+  width:60px;height:60px;padding:18px;color:#2A1A00;
+  background:linear-gradient(150deg,var(--gold-lt),var(--gold) 55%,#B8860F);
+  box-shadow:0 14px 34px -14px rgba(224,165,38,.75);
+}
+.an-btn--play:hover{color:#2A1A00;transform:translateY(-2px) scale(1.04)}
+.an-btn--repeat{width:34px;height:34px;padding:8px;margin-left:2px;color:var(--muted)}
+.an-btn--repeat svg text{fill:currentColor;stroke:none;font-family:var(--body);font-size:8.5px;font-weight:700}
+.an-btn--repeat:hover{color:var(--haze)}
+.an-btn--repeat.is-active{color:var(--gold);filter:drop-shadow(0 0 6px rgba(224,165,38,.65))}
+.an-ico-pause{display:none}
+#anthems.is-playing .an-ico-play{display:none}
+#anthems.is-playing .an-ico-pause{display:block}
+
+.an-vol{display:flex;align-items:center;gap:11px}
+.an-vol-ico{width:17px;height:17px;flex:none;color:var(--muted)}
+.an-vol .an-range{height:3px}
+
+.an-list{list-style:none;margin:20px 0 0;padding:16px 0 0;border-top:1px solid var(--edge);max-height:190px;overflow-y:auto}
+.an-track{
+  display:flex;align-items:baseline;gap:11px;width:100%;text-align:left;
+  padding:9px 10px;border:none;border-radius:9px;background:transparent;
+  color:var(--muted);font-size:13.5px;cursor:pointer;transition:background .2s,color .2s;
+  font-family:var(--body);
+}
+.an-track:hover{background:rgba(255,255,255,.06);color:var(--haze)}
+.an-track.is-current{color:var(--gold);background:rgba(224,165,38,.1)}
+.an-track-num{font-size:11px;font-variant-numeric:tabular-nums;opacity:.6;flex:none;width:16px}
+.an-track-name{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.an-lyricside{display:flex;flex-direction:column;justify-content:center}
+.an-now{padding-bottom:18px;border-bottom:1px solid var(--edge)}
+.an-now-title{font-family:var(--display);font-weight:800;color:var(--haze);font-size:clamp(22px,3.2vw,30px);line-height:1.12;letter-spacing:-.01em;font-variation-settings:'wdth' 108;margin:0}
+.an-now-artist{margin:7px 0 0;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--leaf)}
+
+#anthems{--lyric-size:clamp(21px,3vw,30px)}
+.an-lyrics{flex:0 0 auto;margin-top:8px;display:flex;flex-direction:column;align-items:center;gap:clamp(6px,1.4vh,14px);padding:6px 0}
+.an-lyric-slot{
+  display:block;width:100%;max-width:100%;text-align:center;border:none;background:transparent;
+  font-family:var(--quote);font-style:italic;line-height:1.4;
+  padding:2px 12px;margin:0;border-radius:9px;cursor:pointer;
+  font-size:calc(var(--lyric-size) * .5);font-weight:500;
+  color:rgba(234,244,237,.45);opacity:.55;text-shadow:none;
+  transition:font-size .45s cubic-bezier(.22,1,.36,1),opacity .45s ease,color .4s ease,text-shadow .4s ease;
+}
+.an-lyric-slot:empty{opacity:0;cursor:default}
+.an-lyric-slot:hover:not(:empty){opacity:.85}
+.an-lyric-slot.is-adj{opacity:.6;color:var(--haze);font-size:calc(var(--lyric-size) * .5);text-shadow:0 0 8px rgba(87,192,131,.7),0 0 20px rgba(87,192,131,.35)}
+.an-lyric-slot.is-adj:empty{opacity:0}
+.an-lyric-slot.is-active{opacity:1;font-size:var(--lyric-size);font-weight:600;color:#fffaf0;text-shadow:0 0 10px rgba(224,165,38,.85),0 0 26px rgba(224,165,38,.5),0 0 46px rgba(224,165,38,.25)}
+.an-lyric-slot.is-active:empty{opacity:0}
+.an-note{font-family:var(--body);font-size:13.5px;line-height:1.65;color:var(--muted);padding:10px 12px;text-align:center}
+
+@media(max-width:860px){
+  .an-grid{grid-template-columns:1fr}
+  .an-art{max-width:240px}
+}
+</style>
+<!-- ================= /TEAM ANTHEMS ================= -->
+
+<script>
+(function(){
+  /* Add more songs by copying a block below. Each needs a matching
+     mp3 + cover under assets/audio/ and a lyrics .txt under assets/audio/lyrics/ */
+  const PLAYLIST = [
+    {
+      title:   "Galaw! Benta!",
+      artist:  "WELLTH Team",
+      cover:   "assets/audio/galaw-benta-cover.jpg",
+      src:     "assets/audio/galaw-benta.mp3",
+      lrcFile: "assets/audio/lyrics/galaw-benta.txt"
+    }
+    // Example for the next one, once you have the files ready:
+    // {
+    //   title:   "One Team, One Dream",
+    //   artist:  "WELLTH Team",
+    //   cover:   "assets/audio/one-team-one-dream-cover.jpg",
+    //   src:     "assets/audio/one-team-one-dream.mp3",
+    //   lrcFile: "assets/audio/lyrics/one-team-one-dream.txt"
+    // }
+  ];
+
+  const root   = document.getElementById('anthems');
+  const audio  = document.getElementById('anAudio');
+  const cover  = document.getElementById('anCover');
+  const titleE = document.getElementById('anTitle');
+  const artistE= document.getElementById('anArtist');
+  const slotPrev   = document.getElementById('anSlotPrev');
+  const slotActive = document.getElementById('anSlotActive');
+  const slotNext   = document.getElementById('anSlotNext');
+  const listE  = document.getElementById('anList');
+  const seek   = document.getElementById('anSeek');
+  const vol    = document.getElementById('anVol');
+  const elapsedE  = document.getElementById('anElapsed');
+  const durationE = document.getElementById('anDuration');
+
+  let index = 0, lines = [], activeIdx = -1, scrubbing = false, repeatOne = false;
+  let timedLines = [];
+
+  const fmt = s => (!isFinite(s) || s < 0) ? '0:00'
+    : Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
+  const fill = (el, pct) => el.style.setProperty('--fill', pct + '%');
+
+  function parseLRC(raw){
+    const out = [];
+    (raw || '').split(/\r?\n/).forEach(row => {
+      const stamps = [...row.matchAll(/\[(\d{1,2}):(\d{1,2}(?:[.:]\d{1,3})?)\]/g)];
+      const text = row.replace(/\[[^\]]*\]/g,'').trim();
+      if (!stamps.length) { if (text) out.push({ time:null, text }); return; }
+      stamps.forEach(m => out.push({
+        time: parseInt(m[1],10)*60 + parseFloat(m[2].replace(':','.')),
+        text
+      }));
+    });
+    return out.sort((a,b) => (a.time ?? 0) - (b.time ?? 0));
+  }
+
+  function buildList(){
+    listE.innerHTML = '';
+    PLAYLIST.forEach((song, i) => {
+      const li = document.createElement('li');
+      const b  = document.createElement('button');
+      b.type = 'button';
+      b.className = 'an-track' + (i === index ? ' is-current' : '');
+      b.innerHTML = `<span class="an-track-num">${String(i+1).padStart(2,'0')}</span>
+                     <span class="an-track-name"></span>`;
+      b.querySelector('.an-track-name').textContent = song.title;
+      b.addEventListener('click', () => load(i, true));
+      li.appendChild(b); listE.appendChild(li);
+    });
+  }
+
+  function renderLyrics(){
+    activeIdx = -1;
+    timedLines = lines.map((l, i) => ({ text: l.text, time: l.time, i })).filter(l => l.text);
+    slotPrev.textContent = ''; slotPrev.dataset.time = '';
+    slotActive.textContent = ''; slotActive.dataset.time = '';
+    slotNext.textContent = ''; slotNext.dataset.time = '';
+
+    if (!timedLines.length){
+      const msg = location.protocol === 'file:'
+        ? 'Lyrics need to be served over http(s), not opened directly as a file.'
+        : 'Lyrics for this song are on the way.';
+      slotActive.textContent = msg;
+      slotActive.className = 'an-lyric-slot';
+      slotActive.style.cursor = 'default';
+      return;
+    }
+    slotActive.style.cursor = '';
+    updateSlots(0);
+  }
+
+  async function load(i, play){
+    index = (i + PLAYLIST.length) % PLAYLIST.length;
+    const song = PLAYLIST[index];
+    const loadToken = ++load._token;
+
+    audio.src = song.src;
+    cover.src = song.cover || '';
+    cover.alt = song.title + ' cover art';
+    titleE.textContent  = song.title;
+    artistE.textContent = song.artist || '';
+    buildList();
+    fill(seek, 0); seek.value = 0;
+    elapsedE.textContent = '0:00'; durationE.textContent = '0:00';
+
+    lines = [];
+    slotPrev.textContent = ''; slotActive.textContent = 'Loading lyrics…'; slotNext.textContent = '';
+
+    let raw = song.lrc || '';
+    if (song.lrcFile){
+      try {
+        const res = await fetch(song.lrcFile, { cache: 'no-store' });
+        raw = res.ok ? await res.text() : '';
+      } catch(e){ raw = ''; }
+    }
+
+    if (loadToken !== load._token) return;
+    lines = parseLRC(raw);
+    renderLyrics();
+    if (play) audio.play().catch(()=>{});
+  }
+  load._token = 0;
+
+  function updateSlots(pos){
+    const prev = timedLines[pos - 1], cur = timedLines[pos], next = timedLines[pos + 1];
+    slotPrev.textContent = prev ? prev.text : ''; slotPrev.dataset.time = prev && prev.time !== null ? prev.time : '';
+    slotActive.textContent = cur ? cur.text : ''; slotActive.dataset.time = cur && cur.time !== null ? cur.time : '';
+    slotNext.textContent = next ? next.text : ''; slotNext.dataset.time = next && next.time !== null ? next.time : '';
+  }
+
+  function syncLyrics(t){
+    let idx = -1;
+    for (let i = 0; i < timedLines.length; i++){
+      if (timedLines[i].time !== null && timedLines[i].time <= t + .12) idx = i; else if (timedLines[i].time !== null) break;
+    }
+    if (idx === -1 || idx === activeIdx) return;
+    activeIdx = idx;
+    updateSlots(idx);
+  }
+
+  function frame(){
+    if (!audio.paused && !scrubbing){
+      const d = audio.duration || 0;
+      if (d){ seek.value = (audio.currentTime / d) * 1000; fill(seek, (audio.currentTime/d)*100); }
+      elapsedE.textContent = fmt(audio.currentTime);
+      syncLyrics(audio.currentTime);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  document.getElementById('anPlay').addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+  document.getElementById('anPrev').addEventListener('click', () => {
+    if (audio.currentTime > 3){ audio.currentTime = 0; } else { load(index - 1, true); }
+  });
+  document.getElementById('anNext').addEventListener('click', () => load(index + 1, true));
+
+  const repeatBtn = document.getElementById('anRepeat');
+  repeatBtn.addEventListener('click', () => {
+    repeatOne = !repeatOne;
+    repeatBtn.classList.toggle('is-active', repeatOne);
+    repeatBtn.setAttribute('aria-pressed', String(repeatOne));
+    repeatBtn.setAttribute('aria-label', repeatOne ? 'Repeat this song: on' : 'Repeat this song: off');
+  });
+
+  audio.addEventListener('play',  () => { root.classList.add('is-playing');  document.getElementById('anPlay').setAttribute('aria-label','Pause'); });
+  audio.addEventListener('pause', () => { root.classList.remove('is-playing'); document.getElementById('anPlay').setAttribute('aria-label','Play'); });
+  audio.addEventListener('ended', () => { if (repeatOne){ audio.currentTime = 0; audio.play(); } else load(index + 1, true); });
+  audio.addEventListener('loadedmetadata', () => durationE.textContent = fmt(audio.duration));
+
+  seek.addEventListener('input', () => {
+    scrubbing = true; fill(seek, seek.value/10);
+    if (audio.duration) elapsedE.textContent = fmt((seek.value/1000)*audio.duration);
+  });
+  seek.addEventListener('change', () => {
+    if (audio.duration) audio.currentTime = (seek.value/1000)*audio.duration;
+    scrubbing = false;
+  });
+  vol.addEventListener('input', () => { audio.volume = vol.value/100; fill(vol, vol.value); });
+
+  root.addEventListener('keydown', e => {
+    if (e.target.matches('input,button') && e.key !== ' ') return;
+    if (e.key === ' '){ e.preventDefault(); audio.paused ? audio.play() : audio.pause(); }
+    if (e.key === 'ArrowRight') audio.currentTime += 5;
+    if (e.key === 'ArrowLeft')  audio.currentTime -= 5;
+    if (e.key === 'r' || e.key === 'R') repeatBtn.click();
+  });
+
+  audio.volume = vol.value/100;
+  fill(vol, vol.value);
+  load(0, false);
+  requestAnimationFrame(frame);
+})();
+</script>
+<!-- ================= WHY ================= -->
+<section id="why">
+  <div class="shell">
+    <div class="sec-head rv">
+      <p class="eyebrow">Why WELLTH</p>
+      <h2>Most teams sell you a dream.<br>We hand you the tools.</h2>
+      <p class="lede">Six reasons builders stay with us long after the excitement of week one wears off.</p>
+    </div>
+    <div class="cards">
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M20.8 8.6a5.5 5.5 0 0 0-9.3-3 5.5 5.5 0 0 0-9.3 3c-.6 3.7 3.2 7 9.3 12 6.1-5 9.9-8.3 9.3-12z"/></svg></div>
+        <h3>Health is the first paycheck</h3>
+        <p>We start with how you feel — energy, sleep, and consistency — because a tired builder builds nothing.</p></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19h16M7 16V9m5 7V5m5 11v-5"/></svg></div>
+        <h3>A system, not hype</h3>
+        <p>Scripts, funnels, ad angles, and a weekly scoreboard. You always know the next action to take.</p></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.4.8-4.7 4.4 1.2 6.2L12 17l-5.5 3 1.2-6.2L3 9.4l6.4-.8z"/></svg></div>
+        <h3>Done-for-you assets</h3>
+        <p>Your own team page, ready-made creatives, and captions you can post today without designing anything.</p></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M17 20v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM22 20v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
+        <h3>Mentors who answer</h3>
+        <p>Small pods, real replies. Your upline sits in the same group chat you do and joins your first calls.</p></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></div>
+        <h3>Numbers in the open</h3>
+        <p>Costs, margins, and realistic timelines shown up front. No income promises, just the actual math.</p></article>
+      <article class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-8-4.6-8-10a8 8 0 1 1 16 0c0 5.4-8 10-8 10z"/><circle cx="12" cy="11" r="2.6"/></svg></div>
+        <h3>Built for Philippine reality</h3>
+        <p>COD, GCash, Messenger-first selling, provincial shipping — the way people here actually buy.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VIDEO ================= -->
+<section id="watch">
+  <div class="shell">
+    <div class="sec-head rv">
+      <p class="eyebrow">Watch first</p>
+      <h2>Five minutes beats a<br>five-hour explanation.</h2>
+      <p class="lede">A short walkthrough of what the team does, what you get on day one, and what it actually costs.</p>
+    </div>
+    <div class="glass video-wrap rv">
+      <!-- Swap the figure contents for your embed:
+           <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="WELLTH Team overview" allowfullscreen loading="lazy"></iframe> -->
+      <figure class="frame" id="videoFrame">
+        <button class="play" id="playBtn" aria-label="Play the team overview video">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <figcaption><b>WELLTH Team — the honest overview</b>Replace this placeholder with your YouTube or Facebook video embed.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section id="team">
+  <div class="shell">
+    <div class="sec-head rv">
+      <p class="eyebrow">The team</p>
+      <h2>Operators</h2>
+      <p class="lede">Not "leaders" on a pedestal — operators who still run pages, answer chats, and ship work every week. Tap anyone here and you get a human.</p>
+    </div>
+    <div class="team-grid">
+      <!-- EDIT: swap initials, names, roles, and areas -->
+      <article class="op rv"><div class="av">ME</div><h3>Mike Egyock</h3><p class="role">Systems &amp; Web</p><p class="base">Cainta, Rizal</p></article>
+      <article class="op rv"><div class="av">RV</div><h3>Ruth Villame</h3><p class="role">Ads &amp; Pages</p><p class="base">Metro Manila</p></article>
+      <article class="op rv"><div class="av">03</div><h3>Name Surname</h3><p class="role">Onboarding</p><p class="base">Add city</p></article>
+      <article class="op rv"><div class="av">04</div><h3>Name Surname</h3><p class="role">Product Training</p><p class="base">Add city</p></article>
+      <article class="op rv"><div class="av">05</div><h3>Name Surname</h3><p class="role">Community</p><p class="base">Add city</p></article>
+      <article class="op rv"><div class="av">06</div><h3>Name Surname</h3><p class="role">Content</p><p class="base">Add city</p></article>
+      <article class="op rv"><div class="av">07</div><h3>Name Surname</h3><p class="role">Logistics</p><p class="base">Add city</p></article>
+      <article class="op rv"><div class="av">08</div><h3>Name Surname</h3><p class="role">Customer Care</p><p class="base">Add city</p></article>
+      <article class="op rv"><div class="av">09</div><h3>Name Surname</h3><p class="role">Events</p><p class="base">Add city</p></article>
+      <article class="op rv"><div class="av">10</div><h3>Name Surname</h3><p class="role">Recruitment</p><p class="base">Add city</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="stories">
+  <div class="shell">
+    <div class="sec-head rv">
+      <p class="eyebrow">What members say</p>
+      <h2>Straight from the group chat.</h2>
+    </div>
+    <div class="says">
+      <article class="say rv">
+        <div class="stars">★★★★★</div>
+        <p>Akala ko kailangan ko munang maging magaling mag-sales. Binigyan nila ako ng script at page, tapos sinamahan ako sa unang tatlong chats ko. Doon lang ako naniwala na kaya ko pala.</p>
+        <div class="who"><i>JM</i><span><b>Jonalyn M.</b><span>Joined 2024 · Laguna</span></span></div>
+      </article>
+      <article class="say rv">
+        <div class="stars">★★★★★</div>
+        <p>The weekly huddle is the reason I did not quit. Somebody notices when you disappear for a week, and somebody helps when your ad stops working.</p>
+        <div class="who"><i>RA</i><span><b>Rafael A.</b><span>Joined 2023 · Cebu</span></span></div>
+      </article>
+      <article class="say rv">
+        <div class="stars">★★★★★</div>
+        <p>What I appreciate most is the honesty. They told me it would take months, not weeks, and they showed me the numbers. Walang paasa.</p>
+        <div class="who"><i>CD</i><span><b>Cherry D.</b><span>Joined 2024 · Davao</span></span></div>
+      </article>
+    </div>
+    <p class="hero-note rv" style="margin-top:20px">Member experiences shared with permission. Results depend on effort, skill, and market conditions — they are not typical or guaranteed.</p>
+  </div>
+</section>
+
+<!-- ================= OFFER ================= -->
+<section id="offer">
+  <div class="shell">
+    <div class="sec-head rv">
+      <p class="eyebrow">Our offer</p>
+      <h2>Everything below is free<br>for members.</h2>
+      <p class="lede">No upsell ladder, no paid "inner circle". If it helps you sell and lead better, it is included.</p>
+    </div>
+    <div class="offer-grid">
+      <article class="offer rv"><span class="tag">FREE</span><h3>Facebook Masterclass</h3><p>Page setup, content that gets replies, boosting versus ads manager, and how to read your own numbers.</p></article>
+      <article class="offer rv"><span class="tag">FREE</span><h3>Your own team page</h3><p>A personal page with your referral link and your name on it — built for you, live the same week you join.</p></article>
+      <article class="offer rv"><span class="tag">FREE</span><h3>Creatives &amp; caption pack</h3><p>Posters, reels hooks, and Taglish captions per product line. Download, post, adjust to your voice.</p></article>
+      <article class="offer rv"><span class="tag">FREE</span><h3>Product &amp; compliance training</h3><p>What each product does, how to describe it safely, and the claims we never make. Protects you and your buyer.</p></article>
+      <article class="offer rv"><span class="tag">FREE</span><h3>One-on-one onboarding call</h3><p>Forty-five minutes with an operator to set your goal, your posting rhythm, and your first ten prospects.</p></article>
+      <article class="offer rv"><span class="tag">FREE</span><h3>Weekly live huddle</h3><p>Every week: one lesson, one hot seat, one scoreboard. Recording posted for anyone on the night shift.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MASTERCLASS PREVIEW ================= -->
+<section id="preview">
+  <div class="shell">
+    <div class="sec-head rv">
+      <p class="eyebrow">Inside the member library</p>
+      <h2>Real lessons, not a sales pitch.</h2>
+      <p class="lede">A peek at what's waiting for you — the full video library unlocks the moment you join.</p>
+    </div>
+    <div id="previewGrid" class="offer-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <p id="previewLoading" style="color:var(--muted);grid-column:1/-1">Loading…</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= JOIN ================= -->
+<section id="join">
+  <div class="shell join-grid">
+    <div class="rv">
+      <p class="eyebrow">How to join</p>
+      <h2>Message us,<br>then let's talk.</h2>
+      <p class="lede">Fill in the form and an operator replies within 24 hours — usually much sooner. Just here for the free training? Same form — we'll set up your member login.</p>
+      <ol class="steps">
+        <li><b>Send your details</b><span>Name, address, email, and the number you actually use.</span></li>
+        <li><b>Short chat on Messenger</b><span>We ask what you want out of this and answer everything, including price.</span></li>
+        <li><b>Pick your starting point</b><span>Choose a package that fits your budget. No pressure to take the biggest one.</span></li>
+        <li><b>Onboarding week</b><span>Your page goes live, you get the creatives, and you join the next huddle.</span></li>
+      </ol>
+    </div>
+
+    <!-- FormSubmit: replace the email below with your receiving inbox -->
+    <form class="glass rv" action="https://formsubmit.co/hello@wellthteam.com" method="POST">
+      <input type="hidden" name="_subject" value="New WELLTH Team application">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://wellthteam.com/thank-you.html">
+      <input type="text" name="_honey" style="display:none">
+
+      <div class="f2">
+        <div class="fld"><label for="name">Full name</label>
+          <input id="name" name="Name" type="text" placeholder="Juan Dela Cruz" required></div>
+        <div class="fld"><label for="contact">Contact number</label>
+          <input id="contact" name="Contact" type="tel" placeholder="09XX XXX XXXX" required></div>
+      </div>
+      <div class="fld"><label for="email">Email</label>
+        <input id="email" name="Email" type="email" placeholder="you@email.com" required></div>
+      <div class="fld"><label for="address">Address</label>
+        <textarea id="address" name="Address" placeholder="House/street, barangay, city, province" required></textarea></div>
+
+      <label class="consent" for="consent">
+        <input id="consent" type="checkbox" name="Consent" value="Yes" required>
+        <span>I allow WELLTH Team to contact me about joining and to store these details, in line with the Data Privacy Act of 2012.</span>
+      </label>
+
+      <button class="btn btn-gold" type="submit">Send my details</button>
+      <div class="or">or reach us directly</div>
+      <div class="hero-cta" style="margin-top:14px">
+        <a class="btn btn-ghost" href="https://m.me/" target="_blank" rel="noopener">Message on Messenger</a>
+        <a class="btn btn-ghost" href="https://wa.me/" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ================= QUOTES ================= -->
+<section id="quotes" class="quotes">
+  <div class="shell">
+    <div class="sec-head rv">
+      <p class="eyebrow">Daily fuel</p>
+      <h2>Old words, still the best advice.</h2>
+    </div>
+    <div class="glass stage rv" id="stage" aria-roledescription="carousel" aria-label="Motivational quotes">
+      <figure class="slide on"><q>You have power over your mind — not outside events.</q><figcaption><div class="by">Marcus Aurelius</div><div class="era">Roman emperor · Stoic</div></figcaption></figure>
+      <figure class="slide"><q>Luck is what happens when preparation meets opportunity.</q><figcaption><div class="by">Seneca</div><div class="era">Roman statesman · Stoic</div></figcaption></figure>
+      <figure class="slide"><q>It is not what happens to you, but how you react.</q><figcaption><div class="by">Epictetus</div><div class="era">Freed slave · Stoic teacher</div></figcaption></figure>
+      <figure class="slide"><q>Well-being is realized by small steps, but is no small thing.</q><figcaption><div class="by">Zeno of Citium</div><div class="era">Founder of Stoicism</div></figcaption></figure>
+      <figure class="slide"><q>The man who moves a mountain begins by carrying small stones.</q><figcaption><div class="by">Confucius</div><div class="era">Chinese philosopher</div></figcaption></figure>
+      <figure class="slide"><q>The youth is the hope of our future.</q><figcaption><div class="by">José Rizal</div><div class="era">Philippine national hero</div></figcaption></figure>
+      <figure class="slide"><q>Believe you can and you are halfway there.</q><figcaption><div class="by">Theodore Roosevelt</div><div class="era">26th U.S. president</div></figcaption></figure>
+      <figure class="slide"><q>It always seems impossible until it is done.</q><figcaption><div class="by">Nelson Mandela</div><div class="era">Statesman</div></figcaption></figure>
+      <figure class="slide"><q>Your attitude, not your aptitude, will determine your altitude.</q><figcaption><div class="by">Zig Ziglar</div><div class="era">Author and speaker</div></figcaption></figure>
+      <figure class="slide"><q>Do not wish it were easier. Wish you were better.</q><figcaption><div class="by">Jim Rohn</div><div class="era">Entrepreneur and speaker</div></figcaption></figure>
+    </div>
+    <div class="qnav">
+      <button id="prevQ" aria-label="Previous quote"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <div class="dots" id="dots"></div>
+      <button id="nextQ" aria-label="Next quote"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEFORE FOOTER ================= -->
+<section>
+  <div class="shell">
+    <div class="band rv">
+      <p class="eyebrow" style="justify-content:center">One decision away</p>
+      <h2>The line only rises after somebody starts it.</h2>
+      <p class="lede" style="margin-inline:auto;text-align:center">Start free. Learn the system. Decide later whether you want to build a business out of it.</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:10px">
+        <a class="btn btn-gold" href="#join">Join the team</a>
+        <a class="btn btn-ghost" href="/members/login.html">Member Login</a>
+      </div>
+      <p class="micro">No obligation · No income promises · Real people replying</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="shell">
+    <div class="f-grid">
+      <div class="f-brand">
+        <img src="assets/WELLTH_PROFILE_PICTURE.webp" alt="WELLTH Team">
+        <p>WELLTH Team — together in health and wealth. A community of Filipino builders growing wellness businesses the honest way.</p>
+        <div class="socials" style="margin-top:18px">
+          <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1z"/></svg></a>
+          <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3zm6.9-11.1a1.5 1.5 0 1 1-1.5-1.5 1.5 1.5 0 0 1 1.5 1.5z"/></svg></a>
+          <a href="https://youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2c-.2-.9-.9-1.6-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4c-.9.2-1.6.9-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8c.2.9.9 1.6 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4c.9-.2 1.6-.9 1.8-1.8.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#why">Why WELLTH</a></li>
+          <li><a href="#watch">Watch the overview</a></li>
+          <li><a href="#team">Operators</a></li>
+          <li><a href="#stories">Member stories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Members</h4>
+        <ul>
+          <li><a href="#offer">Free masterclass</a></li>
+          <li><a href="#offer">Creative library</a></li>
+          <li><a href="#offer">Weekly huddle</a></li>
+          <li><a href="#join">Apply to join</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Reach us</h4>
+        <ul>
+          <li><a href="mailto:hello@wellthteam.com">hello@wellthteam.com</a></li>
+          <li><a href="tel:+639000000000">+63 900 000 0000</a></li>
+          <li>Cainta, Rizal, Philippines</li>
+          <li><a href="https://m.me/" target="_blank" rel="noopener">Messenger</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="disclaimer">Income disclaimer: WELLTH Team is a community of independent distributors. Earnings depend on individual effort, skill, and time invested — no level of income is promised or guaranteed. Product statements have not been evaluated by the Philippine FDA. Food supplements are not intended to diagnose, treat, cure, or prevent any disease. No approved therapeutic claims.</p>
+
+    <div class="legal">
+      <span>© <span id="yr">2026</span> WELLTH Team. All rights reserved.</span>
+      <span>Privacy Policy · Terms · Data Privacy Act of 2012 compliant</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* year */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* sticky header state */
+  var head = document.getElementById('head');
+  function onScroll(){
+    head.classList.toggle('stuck', window.scrollY > 24);
+    var d = document.documentElement;
+    var p = d.scrollTop / (d.scrollHeight - d.clientHeight || 1);
+    var fill = document.getElementById('railFill');
+    var node = document.getElementById('railNode');
+    if(fill){ fill.style.height = (p*100).toFixed(2) + '%'; }
+    if(node){ node.style.bottom = (p*100).toFixed(2) + '%'; }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* mobile drawer */
+  var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');
+  function setDrawer(on){
+    drawer.classList.toggle('on', on);
+    burger.setAttribute('aria-expanded', on ? 'true' : 'false');
+    document.body.style.overflow = on ? 'hidden' : '';
+  }
+  burger.addEventListener('click', function(){ setDrawer(!drawer.classList.contains('on')); });
+  document.getElementById('closeDrawer').addEventListener('click', function(){ setDrawer(false); });
+  drawer.addEventListener('click', function(e){ if(e.target.tagName === 'A') setDrawer(false); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') setDrawer(false); });
+
+  /* rotating top-bar line */
+  var lines = [
+    'Health first. Wealth follows. Both are built daily.',
+    'Small steps, done weekly, beat big plans done never.',
+    'Ang mabagal na kumikilos ay mas mabilis pa rin kaysa sa hindi.',
+    'You are one honest conversation away from your first client.'
+  ];
+  var tick = document.querySelector('#ticker span'), li = 0;
+  if(!reduce){
+    setInterval(function(){
+      tick.style.opacity = 0;
+      setTimeout(function(){ li = (li+1) % lines.length; tick.textContent = lines[li]; tick.style.opacity = 1; }, 400);
+    }, 5200);
+  }
+
+  /* scroll reveal */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, {threshold:.14, rootMargin:'0px 0px -60px'});
+  document.querySelectorAll('.rv').forEach(function(el, i){
+    el.style.transitionDelay = ((i % 6) * 60) + 'ms';
+    io.observe(el);
+  });
+
+  /* video placeholder — drop your embed URL here */
+  var VIDEO_EMBED = ''; // e.g. 'https://www.youtube.com/embed/VIDEO_ID?autoplay=1'
+  document.getElementById('playBtn').addEventListener('click', function(){
+    if(!VIDEO_EMBED){ document.getElementById('join').scrollIntoView({behavior:'smooth'}); return; }
+    var f = document.createElement('iframe');
+    f.src = VIDEO_EMBED; f.title = 'WELLTH Team overview'; f.allow = 'autoplay; encrypted-media';
+    f.allowFullscreen = true;
+    document.getElementById('videoFrame').appendChild(f);
+  });
+
+  /* masterclass preview — latest 2 topics, public endpoint, locked CTA */
+  (function(){
+    var grid = document.getElementById('previewGrid');
+    if(!grid) return;
+    fetch('/api/courses/latest').then(function(r){ return r.json(); }).then(function(data){
+      grid.innerHTML = '';
+      var courses = data.courses || [];
+      if(courses.length === 0){
+        grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1">New masterclasses are being added this week — check back soon.</p>';
+        return;
+      }
+      courses.forEach(function(c){
+        var card = document.createElement('a');
+        card.className = 'preview-card';
+        card.href = '#join';
+        card.innerHTML =
+          '<span class="lock-tag">🔒 Members only</span>' +
+          '<h3>' + c.title + '</h3>' +
+          '<p>' + (c.description || '') + '</p>' +
+          '<span class="count">' + c.lesson_count + (c.lesson_count === 1 ? ' video inside' : ' videos inside') + '</span>' +
+          '<span class="unlock">Join free to watch &rarr;</span>';
+        grid.appendChild(card);
+      });
+    }).catch(function(){
+      grid.innerHTML = '';
+    });
+  })();
+
+  /* quote carousel */
+  var slides = Array.prototype.slice.call(document.querySelectorAll('#stage .slide'));
+  var dots = document.getElementById('dots'), cur = 0, timer;
+  slides.forEach(function(_, i){
+    var d = document.createElement('i');
+    d.className = i === 0 ? 'on' : '';
+    d.setAttribute('role','button'); d.setAttribute('tabindex','0');
+    d.setAttribute('aria-label','Quote ' + (i+1));
+    d.addEventListener('click', function(){ go(i); });
+    d.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(i); } });
+    dots.appendChild(d);
+  });
+  function go(n){
+    cur = (n + slides.length) % slides.length;
+    slides.forEach(function(s,i){ s.classList.toggle('on', i === cur); });
+    Array.prototype.forEach.call(dots.children, function(d,i){ d.classList.toggle('on', i === cur); });
+    restart();
+  }
+  function restart(){ if(reduce) return; clearInterval(timer); timer = setInterval(function(){ go(cur+1); }, 6500); }
+  document.getElementById('nextQ').addEventListener('click', function(){ go(cur+1); });
+  document.getElementById('prevQ').addEventListener('click', function(){ go(cur-1); });
+  restart();
+})();
+</script>
+</body>
+</html>

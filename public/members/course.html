@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masterclass — WELLTH Team</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#04150E; --forest:#0A3623; --emerald:#1C7A46; --leaf:#57C083;
+    --gold:#E0A526; --gold-lt:#F6DA9B; --haze:#EAF4ED; --muted:rgba(234,244,237,.66);
+    --glass:rgba(255,255,255,.055); --edge:rgba(255,255,255,.14);
+    --display:"Archivo",system-ui,sans-serif; --body:"Plus Jakarta Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--ink); color:var(--haze); font-family:var(--body); min-height:100vh}
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px clamp(18px,4vw,44px); border-bottom:1px solid var(--edge);
+  }
+  header h1{font-family:var(--display); font-size:15.5px; margin:0; font-weight:800; max-width:60vw;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  header a.back{color:var(--muted); font-size:13px; text-decoration:none; flex:none}
+  main{
+    padding:clamp(16px,3vw,32px); max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:2fr 1fr; gap:26px; align-items:start;
+  }
+  @media(max-width:820px){ main{grid-template-columns:1fr} }
+  .player-wrap{background:#000; border-radius:16px; overflow:hidden; aspect-ratio:16/9; border:1px solid var(--edge)}
+  .player-wrap iframe{width:100%; height:100%; border:0; display:block}
+  .now h2{font-family:var(--display); font-size:19px; margin:18px 0 4px}
+  .now p{color:var(--muted); font-size:13.5px; margin:0}
+  .list{background:var(--glass); border:1px solid var(--edge); border-radius:16px; padding:10px; max-height:70vh; overflow-y:auto}
+  .lesson{
+    display:flex; gap:12px; align-items:center; padding:12px; border-radius:10px;
+    cursor:pointer; transition:background .15s;
+  }
+  .lesson:hover{background:rgba(255,255,255,.06)}
+  .lesson.active{background:rgba(224,165,38,.14); border:1px solid rgba(224,165,38,.4)}
+  .lesson .num{
+    flex:none; width:26px; height:26px; border-radius:50%; display:grid; place-items:center;
+    font-size:11.5px; font-weight:800; background:rgba(255,255,255,.08); font-family:var(--display);
+  }
+  .lesson.active .num{background:var(--gold); color:#2A1A00}
+  .lesson .t{flex:1; min-width:0}
+  .lesson .t .title{font-size:13.5px; font-weight:600; line-height:1.35}
+  .lesson .t .dur{font-size:11.5px; color:var(--muted); margin-top:2px}
+  #loading{padding:60px 0; text-align:center; color:var(--muted)}
+</style>
+</head>
+<body>
+  <header>
+    <h1 id="courseTitle">Loading…</h1>
+    <a class="back" href="/members/courses.html">&larr; All masterclasses</a>
+  </header>
+
+  <div id="loading">Loading…</div>
+
+  <main id="app" style="display:none">
+    <div>
+      <div class="player-wrap">
+        <iframe id="player" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="now">
+        <h2 id="lessonTitle"></h2>
+        <p id="courseDesc"></p>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </main>
+
+<script>
+var params = new URLSearchParams(window.location.search);
+var courseId = params.get('id');
+var lessons = [];
+
+function loadLesson(i){
+  var l = lessons[i];
+  if(!l) return;
+  document.getElementById('player').src = 'https://www.youtube.com/embed/' + l.youtube_id + '?rel=0';
+  document.getElementById('lessonTitle').textContent = l.title;
+  document.querySelectorAll('.lesson').forEach(function(el, idx){
+    el.classList.toggle('active', idx === i);
+  });
+}
+
+(async function(){
+  if(!courseId){ window.location.href = '/members/courses.html'; return; }
+  try {
+    var res = await fetch('/api/courses/' + courseId);
+    if(res.status === 401){ window.location.href = '/members/login.html'; return; }
+    if(res.status === 404){ window.location.href = '/members/courses.html'; return; }
+    var data = await res.json();
+    lessons = data.lessons || [];
+
+    document.getElementById('courseTitle').textContent = data.course.title;
+    document.getElementById('courseDesc').textContent = data.course.description || '';
+
+    var listEl = document.getElementById('list');
+    if(lessons.length === 0){
+      listEl.innerHTML = '<p style="padding:14px;color:var(--muted);font-size:13.5px">No videos added to this masterclass yet.</p>';
+    } else {
+      lessons.forEach(function(l, i){
+        var row = document.createElement('div');
+        row.className = 'lesson';
+        row.innerHTML =
+          '<div class="num">' + (i+1) + '</div>' +
+          '<div class="t"><div class="title">' + l.title + '</div>' +
+          '<div class="dur">' + (l.duration || '') + '</div></div>';
+        row.addEventListener('click', function(){ loadLesson(i); });
+        listEl.appendChild(row);
+      });
+      loadLesson(0);
+    }
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('app').style.display = 'grid';
+  } catch(e){
+    document.getElementById('loading').textContent = 'Something went wrong loading this masterclass.';
+  }
+})();
+</script>
+</body>
+</html>
